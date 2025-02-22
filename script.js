@@ -1,13 +1,14 @@
 // script.js
 let currentDesignType = '';
 
-let currentLanguage = 'bn';
+let currentLanguage = 'en';
 
 const translations = {
 
     bn: {
 
         title: "এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর",
+        title2: "এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর",
 
         singleColor: "সিঙ্গেল কালার",
 
@@ -46,6 +47,7 @@ const translations = {
     en: {
 
         title: "Embroidery Thread Cone Calculator",
+        title2: "Embroidery Thread Cone Calculator",
 
         singleColor: "Single Color",
 
@@ -87,13 +89,14 @@ const translations = {
 function changeLanguage() {
 
     const languageToggle = document.getElementById('language-toggle');
-
     currentLanguage = languageToggle.checked ? 'en' : 'bn';
-
+    
+    // এখানে title এর অনুবাদ যোগ করা হয়েছে
     document.getElementById('title').textContent = translations[currentLanguage].title;
-
+    document.getElementById('title2').textContent = translations[currentLanguage].title2;
+    
+    // বাকি অনুবাদগুলি আগের মতোই রয়েছে
     document.getElementById('singleColorBtn').textContent = translations[currentLanguage].singleColor;
-
     document.getElementById('multiColorBtn').textContent = translations[currentLanguage].multiColor;
 
     document.getElementById('stitches').placeholder = translations[currentLanguage].stitches;
@@ -123,6 +126,15 @@ function changeLanguage() {
     document.getElementById('calculateMultiBtn').textContent = translations[currentLanguage].calculate;
 
     updateThreadTypeOptions();
+    const resultDiv = document.getElementById('result');
+    if (!resultDiv.classList.contains('hidden')) {
+        if (currentDesignType === 'single') {
+            calculateSingle();
+        } else if (currentDesignType === 'multi') {
+            calculateMulti();
+        }
+    }
+
 
 }
 
@@ -296,6 +308,6 @@ document.getElementById('language-toggle').addEventListener('change', changeLang
 
 // Initialize the page with Bangla language
 
-document.getElementById('language-toggle').checked = false;
+document.getElementById('language-toggle').checked = true;
 
 changeLanguage();
