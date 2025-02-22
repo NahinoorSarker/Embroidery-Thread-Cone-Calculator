@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="language-switch">
+            <input type="checkbox" id="language-toggle" class="language-checkbox">
+            <label for="language-toggle" class="language-label">
+                <span class="language bn">বাংলা</span>
+                <span class="toggle-handle"></span>
+                <span class="language en">English</span>
+            </label>
+        </div>
+        <h1 id="title">এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর</h1>
+
+        <div id="designType">
+            <button id="singleColorBtn" onclick="setDesignType('single')">সিঙ্গেল কালার</button>
+            <button id="multiColorBtn" onclick="setDesignType('multi')">মাল্টি কালার</button>
+        </div>
+
+        <div id="singleColorForm" class="hidden">
+            <input type="number" id="stitches" placeholder="মোট স্টিচ সংখ্যা">
+            <input type="number" id="pieces" placeholder="উৎপাদন পরিমাণ">
+            <input type="number" id="stitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)">
+            <input type="number" id="coneLength" placeholder="কোণের দৈর্ঘ্য (মিটার)">
+            <input type="number" id="waste" placeholder="অপচয় শতাংশ (ডিফল্ট 15%)">
+            <select id="threadType">
+                <option value="40wt">40wt (স্ট্যান্ডার্ড)</option>
+                <option value="30wt">30wt (মোটা)</option>
+                <option value="60wt">60wt (সূক্ষ্ম)</option>
+            </select>
+            <button id="calculateSingleBtn" onclick="calculateSingle()">হিসাব করুন</button>
+        </div>
+
+        <div id="multiColorForm" class="hidden">
+            <input type="number" id="colorCount" placeholder="রঙের সংখ্যা">
+            <button id="addColorBtn" onclick="addColorInputs()">রঙ যোগ করুন</button>
+            <div id="colorInputs"></div>
+            <input type="number" id="multiPieces" placeholder="উৎপাদন পরিমাণ">
+            <input type="number" id="multiStitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)">
+            <input type="number" id="multiConeLength" placeholder="কোণের দৈর্ঘ্য (মিটার)">
+            <input type="number" id="multiWaste" placeholder="অপচয় শতাংশ (ডিফল্ট 15%)">
+            <button id="calculateMultiBtn" onclick="calculateMulti()">হিসাব করুন</button>
+        </div>
+
+        <div id="result" class="hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
