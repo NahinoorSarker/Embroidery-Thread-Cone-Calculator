@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="title">এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর</title>
+    <title>Embroidery Calculator | এমব্রয়ডারি ক্যালকুলেটর</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,44 +12,43 @@
             <input type="checkbox" id="language-toggle" class="language-checkbox">
             <label for="language-toggle" class="language-label">
                 <span class="language bn">বাংলা</span>
-                <span class="toggle-handle"></span>
                 <span class="language en">English</span>
+                <span class="toggle-handle"></span>
             </label>
         </div>
-        <div>
-        <!-- <h1 id="title"> এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর </h1>   -->
-         <h1 id="title2"> এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর </h1>   
-        </div>
         
+        <h1 id="title">এমব্রয়ডারি সুতা কোণ ক্যালকুলেটর</h1>
 
         <div id="designType">
-            <button id="singleColorBtn" onclick="setDesignType('single')">সিঙ্গেল কালার</button>
-            <button id="multiColorBtn" onclick="setDesignType('multi')">মাল্টি কালার</button>
+            <button onclick="setDesignType('single')" id="singleColorBtn">সিঙ্গেল কালার</button>
+            <button onclick="setDesignType('multi')" id="multiColorBtn">মাল্টি কালার</button>
         </div>
 
+        <!-- Single Color Form -->
         <div id="singleColorForm" class="hidden">
-            <input type="number" id="stitches" placeholder="মোট স্টিচ সংখ্যা">
-            <input type="number" id="pieces" placeholder="উৎপাদন পরিমাণ">
-            <input type="number" id="stitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)">
-            <input type="number" id="coneLength" placeholder="কোণের দৈর্ঘ্য (মিটার)">
-            <input type="number" id="waste" placeholder="অপচয় শতাংশ (ডিফল্ট 15%)">
+            <input type="number" id="stitches" placeholder="স্টিচ সংখ্যা">
+            <input type="number" id="pieces" placeholder="উৎপাদন সংখ্যা">
+            <input type="number" id="stitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)" value="2.5" step="0.1">
+            <input type="number" id="coneLength" placeholder="কোণ দৈর্ঘ্য (মিটার)" value="3000">
+            <input type="number" id="waste" placeholder="অপচয় শতাংশ" value="15">
             <select id="threadType">
-                <option value="40wt">40wt (স্ট্যান্ডার্ড)</option>
                 <option value="30wt">30wt (মোটা)</option>
+                <option value="40wt">40wt (স্ট্যান্ডার্ড)</option>
                 <option value="60wt">60wt (সূক্ষ্ম)</option>
             </select>
-            <button id="calculateSingleBtn" onclick="calculateSingle()">হিসাব করুন</button>
+            <button onclick="calculateSingle()" id="calculateSingleBtn">হিসাব করুন</button>
         </div>
 
+        <!-- Multi Color Form -->
         <div id="multiColorForm" class="hidden">
             <input type="number" id="colorCount" placeholder="রঙের সংখ্যা">
-            <button id="addColorBtn" onclick="addColorInputs()">রঙ যোগ করুন</button>
+            <button onclick="addColorInputs()" id="addColorBtn">রঙ যোগ করুন</button>
             <div id="colorInputs"></div>
-            <input type="number" id="multiPieces" placeholder="উৎপাদন পরিমাণ">
-            <input type="number" id="multiStitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)">
-            <input type="number" id="multiConeLength" placeholder="কোণের দৈর্ঘ্য (মিটার)">
-            <input type="number" id="multiWaste" placeholder="অপচয় শতাংশ (ডিফল্ট 15%)">
-            <button id="calculateMultiBtn" onclick="calculateMulti()">হিসাব করুন</button>
+            <input type="number" id="multiPieces" placeholder="উৎপাদন সংখ্যা">
+            <input type="number" id="multiStitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)" value="2.5" step="0.1">
+            <input type="number" id="multiConeLength" placeholder="কোণ দৈর্ঘ্য (মিটার)" value="3000">
+            <input type="number" id="multiWaste" placeholder="অপচয় শতাংশ" value="15">
+            <button onclick="calculateMulti()" id="calculateMultiBtn">হিসাব করুন</button>
         </div>
 
         <div id="result" class="hidden"></div>
