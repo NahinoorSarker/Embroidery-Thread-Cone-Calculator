@@ -16,7 +16,12 @@ const translations = {
         total: "মোট",
         requiredCones: "প্রয়োজনীয় কোণ",
         totalStitches: "মোট স্টিচ",
-        totalCones: "মোট কোণ"
+        totalCones: "মোট কোণ",
+        colorCount: "রঙের সংখ্যা",
+        multiPieces: "উৎপাদন সংখ্যা",
+        multiStitchLength: "স্টিচ দৈর্ঘ্য",
+        multiConeLength: "কোণ দৈর্ঘ্য",
+        multiWaste: "অপচয়"
         
     },
     en: {
@@ -35,7 +40,12 @@ const translations = {
         total: "Total",
         requiredCones: "Required Cones",
         totalStitches: "Total stitches",
-        totalCones: "Total cones"
+        totalCones: "Total cones",
+        colorCount: "Number of colors",
+        multiPieces: "Production Quantity",
+        multiStitchLength: "Stitch Length",
+        multiConeLength: "Cone Length",
+        multiWaste: "Waste"
     }
 };
 
@@ -53,12 +63,39 @@ function updateUI() {
     document.getElementById('calculateSingleBtn').textContent = translations[currentLanguage].calculate;
     document.getElementById('addColorBtn').textContent = translations[currentLanguage].addColor;
     document.getElementById('calculateMultiBtn').textContent = translations[currentLanguage].calculate;
-    
-    // Update placeholders
-    document.querySelectorAll('[id="stitches"], [id="pieces"], [id="stitchLength"], [id="coneLength"], [id="waste"]').forEach(el => {
-        el.placeholder = translations[currentLanguage][el.id];
+
+    // Update placeholders for single color form
+    document.getElementById('stitches').placeholder = translations[currentLanguage].stitches;
+    document.getElementById('pieces').placeholder = translations[currentLanguage].pieces;
+    document.getElementById('stitchLength').placeholder = translations[currentLanguage].stitchLength;
+    document.getElementById('coneLength').placeholder = translations[currentLanguage].coneLength;
+    document.getElementById('waste').placeholder = translations[currentLanguage].waste;
+
+    // Update placeholders for multi-color form
+    document.getElementById('colorCount').placeholder = translations[currentLanguage].colorCount;
+    document.getElementById('multiPieces').placeholder = translations[currentLanguage].multiPieces;
+    document.getElementById('multiStitchLength').placeholder = translations[currentLanguage].multiStitchLength;
+    document.getElementById('multiConeLength').placeholder = translations[currentLanguage].multiConeLength;
+    document.getElementById('multiWaste').placeholder = translations[currentLanguage].multiWaste;
+
+    // Update dynamically created color inputs
+    updateDynamicPlaceholders();
+}
+
+function updateDynamicPlaceholders() {
+    const colorNames = document.querySelectorAll('.color-name');
+    const colorStitches = document.querySelectorAll('.color-stitches');
+
+    colorNames.forEach((input, index) => {
+        input.placeholder = `${translations[currentLanguage].threadType} ${index + 1}`;
+    });
+
+    colorStitches.forEach(input => {
+        input.placeholder = translations[currentLanguage].stitches;
     });
 }
+
+
 
 // Form Handling
 function setDesignType(type) {
@@ -72,15 +109,16 @@ function setDesignType(type) {
 function addColorInputs() {
     const count = parseInt(document.getElementById('colorCount').value);
     const container = document.getElementById('colorInputs');
-    container.innerHTML = '';
-    
-    for(let i=0; i<count; i++) {
+    container.innerHTML = ''; // Clear previous inputs
+
+    for (let i = 0; i < count; i++) {
         container.innerHTML += `
-            <input type="text" placeholder="${translations[currentLanguage].threadType} ${i+1}">
-            <input type="number" placeholder="${translations[currentLanguage].stitches}">
+            <input type="text" class="color-name" placeholder="${translations[currentLanguage].threadType} ${i + 1}">
+            <input type="number" class="color-stitches" placeholder="${translations[currentLanguage].stitches}">
         `;
     }
 }
+
 
 // Calculation Logic
 function calculateCones(stitches, pieces, stitchLength, coneLength, waste, threadFactor) {
@@ -123,7 +161,8 @@ function calculateMulti() {
         pieces: parseInt(document.getElementById('multiPieces').value),
         stitchLength: parseFloat(document.getElementById('multiStitchLength').value) || 2.5,
         coneLength: parseFloat(document.getElementById('multiConeLength').value) || 3000,
-        waste: parseFloat(document.getElementById('multiWaste').value) || 15
+        waste: parseFloat(document.getElementById('multiWaste').value) || 15,
+        multithreadType: document.getElementById('multithreadType').value
     };
 
     let totalCones = 0;
@@ -145,7 +184,7 @@ function calculateMulti() {
             inputs.stitchLength,
             inputs.coneLength,
             inputs.waste,
-            factors['40wt'] // ডিফল্ট থ্রেড টাইপ ধরে নেওয়া হয়েছে
+            factors[inputs.multithreadType] // ডিফল্ট থ্রেড টাইপ ধরে নেওয়া হয়েছে
         );
 
         totalCones += cones;

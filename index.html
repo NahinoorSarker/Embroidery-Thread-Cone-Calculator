@@ -45,9 +45,14 @@
             <button onclick="addColorInputs()" id="addColorBtn">রঙ যোগ করুন</button>
             <div id="colorInputs"></div>
             <input type="number" id="multiPieces" placeholder="উৎপাদন সংখ্যা">
-            <input type="number" id="multiStitchLength" placeholder="স্টিচ দৈর্ঘ্য (mm)" value="2.5" step="0.1">
-            <input type="number" id="multiConeLength" placeholder="কোণ দৈর্ঘ্য (মিটার)" value="3000">
-            <input type="number" id="multiWaste" placeholder="অপচয় শতাংশ" value="15">
+            <input type="number" id="multiStitchLength" placeholder="স্টিচ দৈর্ঘ্য" value="2.5" step="0.1">
+            <input type="number" id="multiConeLength" placeholder="কোণ দৈর্ঘ্য" value="3000">
+            <input type="number" id="multiWaste" placeholder="অপচয়" value="15">
+            <select id="multithreadType">
+                <option value="30wt">30wt (মোটা)</option>
+                <option value="40wt">40wt (স্ট্যান্ডার্ড)</option>
+                <option value="60wt">60wt (সূক্ষ্ম)</option>
+            </select>
             <button onclick="calculateMulti()" id="calculateMultiBtn">হিসাব করুন</button>
         </div>
 
